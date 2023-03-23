@@ -2,7 +2,7 @@ CC=			gcc
 CFLAGS=		-g -Wall -O0 -Wno-unused-function
 DFLAGS=		
 OBJS=		khmm.o kmin.o cli.o core.o em.o aux.o
-PROG=		psmc
+PROG=		eSMC
 LIBS=		-lm -lz
 
 .SUFFIXES:.c .o
@@ -12,15 +12,12 @@ LIBS=		-lm -lz
 
 all:$(PROG)
 
-psmc:$(OBJS) main.o
+eSMC:$(OBJS) main.o
 		$(CC) $(CCFLAGS) $(DFLAGS) $(OBJS) main.o -o $@ $(LIBS)
-
-psmc.pdf:psmc.tex
-		pdflatex psmc; bibtex psmc; pdflatex psmc; pdflatex psmc
 
 khmm.o:khmm.h
 kmin.o:kmin.h
 cli.o core.o aux.o em.o:psmc.h khmm.h
 
 clean:
-		rm -f *.o a.out *~ *.a $(PROG) psmc*.aux psmc*.out psmc*.idx psmc*.log psmc*.pdf psmc*.bbl psmc*.blg
+		rm -f *.o a.out *~ *.a $(PROG)
